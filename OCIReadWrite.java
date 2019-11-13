@@ -18,10 +18,7 @@ import com.oracle.commons.ociobjectstorageutils.handler.ObjectStorageHandler;
 public class OCIReadWrite {
 
     public static void main(String[] args) throws Exception {
-//        if(args.length<2){
-//            System.out.println("Please pass the compartmentID and Running Time");
-//            System.exit(0);
-//        }
+
 		/*
 		Initialize the object storage client instance
 		 */
@@ -36,9 +33,9 @@ public class OCIReadWrite {
 		 Any compartment OCID where you want to do the operations
 		 */
         
-        String nameSpace = "paasdevsss"; //args[0];
+        String nameSpace = "";  
         
-        String compartmentOCID = "ocid1.compartment.oc1..aaaaaaaa44dewz4rqbodb5vmsd7iin45q72eniracmvbzqzgeinqopmcayrq"; //args[1];
+        String compartmentOCID = "";  
 
 		/*
 		Bucket related operations creating TestBucketExample
@@ -47,37 +44,35 @@ public class OCIReadWrite {
 		/*
 		Setting the data
 		 */
-        String bucketName = "qa-assets"; //args[2];
+        String bucketName = ""; 
         
-        //paasdevsss ocid1.compartment.oc1..aaaaaaaa44dewz4rqbodb5vmsd7iin45q72eniracmvbzqzgeinqopmcayrq qa-assets
+        String filePath = "";
         
-        String filePath = "/Users/marrajen/Documents/SSS";
-        
-        String fileName = "LongRun.txt";
+        String fileName = "";
         
 
-//        Path path = Paths.get(System.getProperty("user.home") + filePath);
-//        if (Files.exists(path)) {
-//            Files.walk(path)
-//                    .sorted(Comparator.reverseOrder())
-//                    .map(Path::toFile)
-//                    .forEach(File::delete);
-//        }
-//        String content = "Hello World !!";
-//        File files = new File(System.getProperty("user.home") + "/upload/firstLevel/secondLevel");
-//        if (!files.exists()) {
-//            if (files.mkdirs()) {
-//                System.out.println("Multiple directories are created!");
-//            } else {
-//                System.out.println("Failed to create multiple directories!");
-//            }
-//        }
-//        Path path1 = Paths.get(System.getProperty("user.home") + "/upload");
-//        Path path2 = Paths.get(System.getProperty("user.home") + "/upload//firstLevel");
-//        Path path3 = Paths.get(System.getProperty("user.home") + "/upload/firstLevel/secondLevel");
+        Path path = Paths.get(System.getProperty("user.home") + filePath);
+        if (Files.exists(path)) {
+            Files.walk(path)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        }
+        String content = "Hello World !!";
+        File files = new File(System.getProperty("user.home") + "/upload/firstLevel/secondLevel");
+        if (!files.exists()) {
+            if (files.mkdirs()) {
+                System.out.println("Multiple directories are created!");
+            } else {
+                System.out.println("Failed to create multiple directories!");
+            }
+        }
+        Path path1 = Paths.get(System.getProperty("user.home") + "/upload");
+        Path path2 = Paths.get(System.getProperty("user.home") + "/upload//firstLevel");
+        Path path3 = Paths.get(System.getProperty("user.home") + "/upload/firstLevel/secondLevel");
         
         
-/*        Path path1 = Paths.get(filePath);
+        Path path1 = Paths.get(filePath);
         Path path1File = path1.resolve(fileName);
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -107,16 +102,16 @@ public class OCIReadWrite {
         	System.out.println("***** File Check : " + (objectStorageHandler.getManageObjects().isObjectExists(bucketName, fileName)) + " *****");
         	System.out.println("***** File " + fileName + " is written to OCI Storage successfully *****");
         	System.out.println(objectStorageHandler.getManageObjects().getObject(bucketName, (fileName)).getContentType());;
-        }*/
+        }
         
-//        PutObjectRequest putobjectRequest = PutObjectRequest.builder()
-//                .namespaceName(nameSpace)
-//                .bucketName(bucketName)
-//                .objectName(fileName)
-//        		  .putObjectBody(InputStream putObjectBody) 
-//                .build();
-//        
-//        objectStorageHandler.getObjectStorageClient().putObject(putobjectRequest);
+        PutObjectRequest putobjectRequest = PutObjectRequest.builder()
+                .namespaceName(nameSpace)
+                .bucketName(bucketName)
+                .objectName(fileName)
+        		  .putObjectBody(InputStream putObjectBody) 
+                .build();
+        
+        objectStorageHandler.getObjectStorageClient().putObject(putobjectRequest);
         
         
         
@@ -128,7 +123,7 @@ public class OCIReadWrite {
         
         GetObjectResponse objectResponse = objectStorageHandler.getObjectStorageClient().getObject(getobjectRequest);
 
-        //String filepath="/Users/marrajen/Documents/SSS//"+fileName.toString();
+        
         try(InputStream inputStream = objectResponse.getInputStream())
         {
         	BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
@@ -149,9 +144,6 @@ public class OCIReadWrite {
           file.createNewFile();
           Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
           System.out.println("***** Successfully downloaded the file " + fileName + "from OCI Storage to Local *****");
-          //String writeContent = new String(Files.readAllBytes(Paths.get(path1File.toString())));
-          
-          //System.out.println("***** " + writeContent + " *****");
         } 
         catch (IOException e) 
         {

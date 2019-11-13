@@ -6,3 +6,11 @@
     Output File Location
     Job Running Time
     Job Sleep Time Interval
+
+
+# OCIObejctDownload
+  Downloading the files from Object Storage from Oracle Cloud Infrastracutre Cloud.
+  
+  
+# OCIReadWrite
+  Read Writting the files from Object Storage from Oracle Cloud Infrastracutre Cloud.

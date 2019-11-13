@@ -1,0 +1,13 @@
+	    CookieStore cookieStore = new BasicCookieStore(); 
+	    BasicClientCookie cookie = new BasicClientCookie("sparkui_token", sparkuiToken[0]);
+	    cookie.setDomain(application_uri);
+	    cookie.setPath("/");
+	    
+	    cookieStore.addCookie(cookie);
+	    
+	    /*httpclient = HttpClients.custom()
+	            .setDefaultCookieStore(cookieStore)
+	            .build(); */
+	    
+		HttpClientContext context = HttpClientContext.create();
+		context.setCookieStore(cookieStore);

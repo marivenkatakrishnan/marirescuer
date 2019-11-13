@@ -42,9 +42,7 @@ public class OCIObejctDownload {
 			file.createNewFile();
 			Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("***** Successfully downloaded the file " + fileName + "from OCI Storage to Local *****");
-			//String writeContent = new String(Files.readAllBytes(Paths.get(path1File.toString())));
-
-			//System.out.println("***** " + writeContent + " *****");
+			
 		} 
 		catch (IOException e) 
 		{

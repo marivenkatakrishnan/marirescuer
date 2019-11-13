@@ -27,8 +27,6 @@ public final class SparkReadWrite {
 	 
 	  int timeDuration = Integer.parseInt(args[0]);
 	  int totalStreamingTime = Integer.parseInt(args[1]);
-//	  
-//	  int frequencyInterval = totalStreamingTime/timeDuration;
 	  
 	  Logger.getLogger("org").setLevel(Level.OFF);
 	  
@@ -45,12 +43,7 @@ public final class SparkReadWrite {
     for (int i = 0; i < 1000; i++) {
       list.add(i);
     }
-//    int count = 0;
-//	while(count < timeDuration ) 
-//	{
-//		list.add(count);
-//		count = count + 1;
-//	}
+
     Queue<JavaRDD<Integer>> rddQueue = new LinkedList<>();
     for (int i = 0; i < 10; i++) {
       rddQueue.add(ssc.sparkContext().parallelize(list));

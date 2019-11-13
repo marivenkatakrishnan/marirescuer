@@ -23,3 +23,6 @@
     ## Arguments:
     Job Running Time
     Job Sleep Time Interval
+    
+# RESTApiCookie
+  Add Password or any other token to the REST API Request via cookie

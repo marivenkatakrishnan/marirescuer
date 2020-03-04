@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+  
+set hostname [lindex $argv 0];
+set pin [lindex $argv 1];
+
+set timeout 60
+
+send_user "INFO: Connecting to server $hostname"
+
+set cmds [list "ssh $hostname"]
+
+foreach cmd $cmds {
+    spawn -noecho bash -c $cmd
+    expect {
+        -nocase "Enter PIN:" {
+            #Mac
+            exp_send "$pin\r"
+            exp_continue
+        } "PIV Card Holder pin (PIV_II)':" {
+            #Fedora
+            exp_send "$pin\r"
+            exp_continue
+        }
+        eof { wait } ; # at this time the last spawn'ed process has exited
+    }
+}
